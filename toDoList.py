@@ -11,7 +11,7 @@ def load_tasks():
     if not os.path.exists(TODO_FILE):
         return []
 
-    with open(TODO_FILE, "r") as f: # r για να 
+    with open(TODO_FILE, "r") as f:  # r για να
         return json.load(f)
 
 
@@ -28,6 +28,17 @@ def list_tasks(tasks):
         return
     for i, task in enumerate(tasks, 1):
         print(f"{i}. [{'x' if task['done'] else ' '}] {task['title']}")
+
+
+def delete_tasks(tasks, index):
+    """Διαγράφει μια εγγεγραμμένη λειτουργία."""
+    if index < 0 or index >= len(tasks):
+        print("🔹 Δεν υπάρχει καταχωρημένη εργασία")
+        return
+    else:
+        tasks.pop(index)
+        save_tasks(tasks)
+        print("Διαγράφηκε με επιτυχία η εργασία:")
 
 
 def add_task(tasks, title):
@@ -53,7 +64,7 @@ def main():
     while True:
         print("\n--- TO DO LIST ---")
         list_tasks(tasks)
-        print("\n1. Προσθήκη\n2. Ολοκλήρωση\n3. Έξοδος")
+        print("\n1. Προσθήκη\n2. Ολοκλήρωση\n3. Διαγραφή Εργασίας\n4. Έξοδος")
         choice = input("Επιλογή: ")
 
         if choice == "1":
@@ -65,9 +76,17 @@ def main():
                 mark_done(tasks, index)
             except ValueError:
                 print("❌ Μη έγκυρη εισαγωγή.")
-        elif choice == "3":
+
+        elif choice == "4":
             print("👋 Έξοδος.")
             break
+
+        elif choice == "3":
+            try:
+                index = int(input("Αριθμός εργασίας προς διαγραφή: ")) - 1
+                delete_tasks(tasks, index)
+            except ValueError:
+                print("❌ Μη έγκυρη εισαγωγή.")
         else:
             print("❌ Μη έγκυρη επιλογή.")
 
