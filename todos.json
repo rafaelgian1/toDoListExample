@@ -1,0 +1,22 @@
+[
+    {
+        "title": "Reviewing Code",
+        "done": false
+    },
+    {
+        "title": "Read Book",
+        "done": false
+    },
+    {
+        "title": "Study Algorithms",
+        "done": false
+    },
+    {
+        "title": "Study Python",
+        "done": false
+    },
+    {
+        "title": "Collect Past Papers for exams",
+        "done": false
+    }
+]
